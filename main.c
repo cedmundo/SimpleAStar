@@ -7,7 +7,7 @@
 #define GRID_COLS 10
 #define CELL_SIZE 80
 
-enum Cell{
+enum cell {
     CELL_EMPTY,
     CELL_OBSTACLE,
     CELL_ORIGIN,
@@ -16,7 +16,7 @@ enum Cell{
 };
 
 struct grid {
-    enum Cell *cells;
+    enum cell *cells;
     int rows;
     int cols;
     int cell_size;
@@ -24,7 +24,7 @@ struct grid {
 
 struct grid *grid_new(int rows, int cols, int cell_size) {
     struct grid *grid = calloc(1, sizeof(struct grid));
-    grid->cells = calloc(rows * cols, sizeof(enum Cell));
+    grid->cells = calloc(rows * cols, sizeof(enum cell));
     grid->rows = rows;
     grid->cols = cols;
     grid->cell_size = cell_size;
@@ -49,7 +49,7 @@ void grid_draw(struct grid *grid) {
                     [CELL_ORIGIN] = SKYBLUE,
                     [CELL_TARGET] = BLUE,
             };
-            enum Cell cell_type = grid->cells[i*grid->cols+j];
+            enum cell cell_type = grid->cells[i * grid->cols + j];
             DrawRectangle(i*cell_size, j*cell_size, cell_size, cell_size, colors[cell_type]);
             DrawRectangleLines(i*cell_size, j*cell_size, cell_size, cell_size, BLACK);
             if (cell_type == CELL_ORIGIN) {
